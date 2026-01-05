@@ -1,0 +1,598 @@
+
+  /* ========================================
+       CSS RESET & BASE STYLES
+    ======================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Warm, spiritual color palette */
+      --background: hsl(38, 45%, 97%);
+      --foreground: hsl(25, 30%, 18%);
+      --card: hsl(38, 40%, 95%);
+      --card-foreground: hsl(25, 30%, 18%);
+      --primary: hsl(36, 75%, 45%);
+      --primary-foreground: hsl(38, 45%, 97%);
+      --secondary: hsl(38, 35%, 92%);
+      --secondary-foreground: hsl(25, 30%, 25%);
+      --muted: hsl(38, 25%, 90%);
+      --muted-foreground: hsl(25, 15%, 45%);
+      --accent: hsl(18, 65%, 55%);
+      --border: hsl(38, 30%, 85%);
+      
+      /* Custom colors */
+      --gold: hsl(36, 75%, 45%);
+      --gold-light: hsl(40, 70%, 75%);
+      --cream: hsl(38, 45%, 97%);
+      --warm-brown: hsl(25, 30%, 18%);
+      --sage: hsl(120, 15%, 70%);
+      
+      /* Gradients */
+      --gradient-gold: linear-gradient(135deg, hsl(36, 75%, 45%) 0%, hsl(40, 70%, 55%) 100%);
+      
+      /* Shadows */
+      --shadow-soft: 0 4px 20px -4px hsla(25, 30%, 18%, 0.08);
+      --shadow-card: 0 8px 30px -8px hsla(25, 30%, 18%, 0.12);
+      --shadow-button: 0 4px 14px -2px hsla(36, 75%, 45%, 0.4);
+      
+      --radius: 0.75rem;
+    
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-serif);
+      line-height: 1.2;
+      font-weight: 600; /* sensible default; can be overridden */
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ========================================
+       UTILITY CLASSES
+    ======================================== */
+    
+    /* Utilities to force font family / weight where needed */
+    .font-serif { font-family: var(--font-serif) !important; }
+    .font-sans  { font-family: var(--font-sans) !important; }
+    .fw-700     { font-weight: 700 !important; }
+    .fw-600     { font-weight: 600 !important; }
+
+
+    .container {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .section-padding {
+      padding: 4rem 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-padding {
+        padding: 6rem 2rem;
+      }
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .gradient-text {
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+    ======================================== */
+    .heading-hero {
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--warm-brown);
+    }
+
+    @media (min-width: 768px) {
+      .heading-hero {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .heading-hero {
+        font-size: 3.75rem;
+      }
+    }
+
+    /* Específico: garantir Cormorant + negrito para seções */
+    .heading-section {
+      font-family: var(--font-serif); /* forçar primeira fonte */
+      font-weight: 700;               /* negrito */
+      font-size: 1.875rem;
+      color: var(--warm-brown);
+    }
+
+    @media (min-width: 768px) {
+      .heading-section {
+        font-size: 2.25rem;
+      }
+    }
+
+    .text-body {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--muted-foreground);
+    }
+
+    @media (min-width: 768px) {
+      .text-body {
+        font-size: 1.125rem;
+      }
+    }
+
+    .text-emotional {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--foreground);
+    }
+
+
+    @media (min-width: 768px) {
+      .text-emotional {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* ========================================
+       DIVIDER ORNAMENT
+    ======================================== */
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      max-width: 6rem;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .divider-ornament span,
+    .divider-ornament svg {
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    .divider-left {
+      justify-content: flex-start;
+    }
+
+    .divider-left::after {
+      display: none;
+    }
+
+    /* ========================================
+       BUTTONS
+    ======================================== */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      background: var(--gradient-gold);
+      color: var(--primary-foreground);
+      box-shadow: var(--shadow-button);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px -4px hsla(36, 75%, 45%, 0.5);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* ========================================
+       CARDS
+    ======================================== */
+    .card-feature {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: var(--card);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    @media (min-width: 768px) {
+      .card-feature {
+        padding: 2rem;
+      }
+    }
+
+    .card-feature:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
+    }
+
+    /* ========================================
+       CHECK ITEMS
+    ======================================== */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      text-align: left;
+    }
+
+    .check-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.125rem;
+      background: hsla(36, 75%, 45%, 0.15);
+      color: var(--primary);
+    }
+
+    .check-icon svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* ========================================
+       HERO SECTION
+    ======================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        hsla(38, 45%, 97%, 0.3) 0%,
+        hsla(38, 45%, 97%, 0.6) 50%,
+        var(--background) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 5rem 1rem;
+      max-width: 56rem;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      color: hsla(25, 30%, 18%, 0.8);
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .hero-subtitle {
+        font-size: 1.5rem;
+      }
+    }
+
+    .hero-description {
+      max-width: 42rem;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ========================================
+       SECTIONS
+    ======================================== */
+    .section-secondary {
+      background: var(--secondary);
+    }
+
+    .section-gradient {
+      background: linear-gradient(180deg, var(--secondary) 0%, var(--background) 100%);
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    .grid-2-content {
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 28rem;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .grid-3 {
+        gap: 2rem;
+      }
+    }
+
+    /* Feature list */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Not list */
+    .not-list {
+      max-width: 36rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .not-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: var(--radius);
+      background: hsla(38, 25%, 90%, 0.5);
+    }
+
+    .not-item span {
+      color: var(--muted-foreground);
+    }
+
+    /* Ebook image container */
+    .ebook-image-container {
+      position: relative;
+    }
+
+    .ebook-image-glow {
+      position: absolute;
+      inset: -1rem;
+      background: linear-gradient(135deg, hsla(36, 75%, 45%, 0.1) 0%, hsla(36, 75%, 45%, 0.05) 100%);
+      border-radius: 1.5rem;
+      filter: blur(2rem);
+    }
+
+    .ebook-image {
+      position: relative;
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px -12px hsla(0, 0%, 0%, 0.25);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Ebook pages */
+    .ebook-page {
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px hsla(0, 0%, 0%, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .ebook-page:hover {
+      box-shadow: 0 20px 25px -5px hsla(0, 0%, 0%, 0.15);
+    }
+
+    .ebook-page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ========================================
+       CTA / PRICING SECTION
+    ======================================== */
+    .cta-card {
+      max-width: 32rem;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    @media (min-width: 768px) {
+      .cta-card {
+        padding: 3rem;
+      }
+    }
+
+    .price-old {
+      color: var(--muted-foreground);
+      text-decoration: line-through;
+      font-size: 1.125rem;
+    }
+
+    .price-tag {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: var(--font-sans), Georgia, serif;
+      color: var(--primary);
+    }
+
+    @media (min-width: 768px) {
+      .price-tag {
+        font-size: 3.75rem;
+      }
+    }
+
+    .price-info {
+      color: var(--muted-foreground);
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    .guarantee-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      background: hsla(120, 15%, 70%, 0.3);
+      color: var(--foreground);
+    }
+
+    .guarantee-badge svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      color: var(--muted-foreground);
+      font-size: 0.875rem;
+    }
+
+    footer .love {
+      color: hsla(25, 15%, 45%, 0.6);
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ========================================
+       SVG ICONS (inline)
+    ======================================== */
+    .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .icon-sm {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* ========================================
+       SPACING UTILITIES
+    ======================================== */
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-10 { margin-bottom: 2.5rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-10 { margin-top: 2.5rem; }
